@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,11 +30,27 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  final logger = Logger(
+    printer: PrettyPrinter(
+      methodCount: 0,
+      errorMethodCount: 5,
+      lineLength: 50,
+      colors: true,
+      printEmojis: true,
+      printTime: false,
+    ),
+  );
 
   void _incrementCounter() {
     setState(() {
       _counter++;
     });
+
+    logger.v('You don\'t always want to see all of these');
+    logger.d('Logs a debug message');
+    logger.i('Public Function called');
+    logger.w('This might become a problem');
+    logger.e('Something has happened');
   }
 
   @override
